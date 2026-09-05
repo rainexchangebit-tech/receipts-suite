@@ -3,9 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "install:apps": "npm ci --include=dev --prefix apps/binance-withdraw && npm ci --include=dev --prefix apps/binance-deposit",
-    "typecheck": "npm run typecheck --prefix apps/binance-withdraw && npm run typecheck --prefix apps/binance-deposit",
-    "build": "npm run build --prefix apps/binance-withdraw && npm run build --prefix apps/binance-deposit",
+    "install:apps": "npm ci --include=dev --prefix apps/binance-withdraw && npm ci --include=dev --prefix apps/binance-deposit && npm ci --include=dev --prefix apps/crypto-deposit",
+    "typecheck": "npm run typecheck --prefix apps/binance-withdraw && npm run typecheck --prefix apps/binance-deposit && npm run typecheck --prefix apps/crypto-deposit",
+    "build": "npm run build --prefix apps/binance-withdraw && npm run build --prefix apps/binance-deposit && npm run build --prefix apps/crypto-deposit",
     "preview": "node scripts/local-preview.mjs"
   }
 }

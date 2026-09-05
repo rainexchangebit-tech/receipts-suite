@@ -11,6 +11,7 @@ const port = Number(process.env.PORT || 4173);
 const apps = [
   { path: "binance-withdraw", port: 3001 },
   { path: "binance-deposit", port: 3002 },
+  { path: "crypto-deposit", port: 3003 },
 ];
 
 const receipts = apps.map(({ path, port: appPort }) =>
