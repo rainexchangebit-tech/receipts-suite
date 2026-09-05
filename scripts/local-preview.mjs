@@ -8,15 +8,22 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const hubRoot = join(root, "hub");
 const port = Number(process.env.PORT || 4173);
 
-const receipt = spawn(process.execPath, [join(root, "apps/binance-withdraw/.output/server/index.mjs")], {
-  env: {
-    ...process.env,
-    PORT: "3001",
-    HOST: "127.0.0.1",
-    VITE_AUTH_ENABLED: "false",
-  },
-  stdio: "inherit",
-});
+const apps = [
+  { path: "binance-withdraw", port: 3001 },
+  { path: "binance-deposit", port: 3002 },
+];
+
+const receipts = apps.map(({ path, port: appPort }) =>
+  spawn(process.execPath, [join(root, `apps/${path}/.output/server/index.mjs`)], {
+    env: {
+      ...process.env,
+      PORT: String(appPort),
+      HOST: "127.0.0.1",
+      VITE_AUTH_ENABLED: "false",
+    },
+    stdio: "inherit",
+  }),
+);
 
 const types = {
   ".css": "text/css; charset=utf-8",
@@ -29,11 +36,12 @@ const types = {
 
 const server = createServer((incoming, outgoing) => {
   const url = new URL(incoming.url || "/", `http://${incoming.headers.host || "localhost"}`);
-  if (url.pathname.startsWith("/binance-withdraw/")) {
+  const app = apps.find(({ path }) => url.pathname.startsWith(`/${path}/`));
+  if (app) {
     const proxied = request(
       {
         hostname: "127.0.0.1",
-        port: 3001,
+        port: app.port,
         path: `${url.pathname}${url.search}`,
         method: incoming.method,
         headers: incoming.headers,
@@ -62,14 +70,16 @@ const server = createServer((incoming, outgoing) => {
 
 function shutdown() {
   server.close();
-  receipt.kill("SIGTERM");
+  for (const receipt of receipts) receipt.kill("SIGTERM");
 }
 
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
-receipt.on("exit", (code) => {
-  if (code && code !== 0) process.exitCode = code;
-});
+for (const receipt of receipts) {
+  receipt.on("exit", (code) => {
+    if (code && code !== 0) process.exitCode = code;
+  });
+}
 
 server.listen(port, "127.0.0.1", () => {
   console.log(`Receipts Suite: http://127.0.0.1:${port}/`);
