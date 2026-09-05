@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.vercel/
+.grok/
+.tanstack/
+.output/
+coverage/
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+

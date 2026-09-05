@@ -1,0 +1,11 @@
+{
+  "name": "receipts-suite",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:apps": "npm ci --include=dev --prefix apps/binance-withdraw",
+    "typecheck": "npm run typecheck --prefix apps/binance-withdraw",
+    "build": "npm run build --prefix apps/binance-withdraw",
+    "preview": "node scripts/local-preview.mjs"
+  }
+}

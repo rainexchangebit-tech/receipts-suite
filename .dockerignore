@@ -1,0 +1,12 @@
+.git
+**/node_modules
+**/dist
+**/build
+**/.vercel
+**/.grok
+**/.tanstack
+**/.output
+**/coverage
+**/*.log
+**/*.tmp
+**/*.temp
