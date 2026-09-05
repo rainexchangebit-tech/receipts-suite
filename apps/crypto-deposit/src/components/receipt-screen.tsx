@@ -9,45 +9,86 @@ import {
   type ReceiptData,
 } from "@/lib/receipt";
 
+function LocationArrow() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true">
+      <path
+        d="M10.85 1.2L1.15 5.15l4.2 1.45 1.45 4.2L10.85 1.2z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 function SignalIcon() {
   return (
-    <svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true">
-      <rect x="0.2" y="8.4" width="3.1" height="3.4" rx="0.55" fill="#111111" />
-      <rect x="4.9" y="5.8" width="3.1" height="6" rx="0.55" fill="#111111" />
-      <rect x="9.6" y="3.1" width="3.1" height="8.7" rx="0.55" fill="#111111" />
-      <rect x="14.3" y="0.4" width="3.1" height="11.4" rx="0.55" fill="#111111" />
+    <svg width="17" height="17" viewBox="0 0 18 12" aria-hidden="true">
+      <rect x="0.2" y="8.4" width="3.2" height="3.4" rx="0.55" fill="currentColor" />
+      <rect x="4.8" y="5.7" width="3.2" height="6.1" rx="0.55" fill="currentColor" />
+      <rect x="9.4" y="2.9" width="3.2" height="8.9" rx="0.55" fill="currentColor" />
+      <rect x="14" y="0.2" width="3.2" height="11.6" rx="0.55" fill="currentColor" />
+    </svg>
+  );
+}
+
+function WifiIcon() {
+  return (
+    <svg
+      className="bn-wifi"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M3.55 9.85c4.75-4.6 12.15-4.6 16.9 0"
+        stroke="currentColor"
+        strokeWidth="2.55"
+        strokeLinecap="round"
+      />
+      <path
+        d="M6.65 13.15c2.95-2.85 7.75-2.85 10.7 0"
+        stroke="currentColor"
+        strokeWidth="2.55"
+        strokeLinecap="round"
+      />
+      <path
+        fill="currentColor"
+        d="M12 20.55c0 0-3.15-4.05-2.35-5.15.85-1.15 3.85-1.15 4.7 0 .8 1.1-2.35 5.15-2.35 5.15z"
+      />
     </svg>
   );
 }
 
 function BatteryIcon({ level }: { level: number }) {
   const pct = Math.max(0, Math.min(100, level));
-  const fillW = 18.2 * (pct / 100);
+  const fillW = 18.8 * (pct / 100);
   return (
     <svg width="27" height="13" viewBox="0 0 27 13" aria-hidden="true">
       <rect
-        x="0.55"
-        y="1.05"
-        width="22"
-        height="10.9"
-        rx="2.3"
+        x="0.65"
+        y="0.65"
+        width="23.3"
+        height="11.7"
+        rx="2.5"
+        stroke="currentColor"
+        strokeWidth="1.2"
         fill="none"
-        stroke="#111111"
-        strokeOpacity="0.32"
-        strokeWidth="1.15"
+        opacity="0.92"
       />
       <rect
-        x="2.05"
-        y="2.55"
+        x="2.1"
+        y="2.15"
         width={fillW}
-        height="7.9"
-        rx="1.35"
-        fill="#111111"
+        height="8.7"
+        rx="1.25"
+        fill="currentColor"
       />
       <path
-        d="M24.4 4.35c.95.4 1.45 1.1 1.45 2.15s-.5 1.75-1.45 2.15V4.35z"
-        fill="#111111"
-        opacity="0.38"
+        d="M24.75 4.15c.95.4 1.5 1 1.5 2.35s-.55 1.95-1.5 2.35V4.15z"
+        fill="currentColor"
+        opacity="0.88"
       />
     </svg>
   );
@@ -99,11 +140,15 @@ export const ReceiptScreen = forwardRef<
   return (
     <div className="rw" ref={ref} data-receipt="true">
       {data.showStatusBar ? (
-        <div className="rw-sb">
-          <span className="rw-sb-time">{data.statusTime}</span>
-          <div className="rw-sb-right">
+        <div className="bn-statusbar">
+          <div className="bn-status-left">
+            <span className="bn-time">{data.statusTime}</span>
+            <LocationArrow />
+          </div>
+          <div className="bn-status-right">
             <SignalIcon />
-            <span className="rw-sb-carrier">{data.carrier}</span>
+            <span className="bn-5g">{data.carrier || "5G"}</span>
+            {data.showWifi ? <WifiIcon /> : null}
             <BatteryIcon level={data.battery} />
           </div>
         </div>
@@ -119,7 +164,7 @@ export const ReceiptScreen = forwardRef<
       </div>
 
       <div className="rw-hero">
-        <AssetLogo asset={data.asset} size={68} />
+        <AssetLogo asset={data.asset} size={64} />
         <div className="rw-amount">{displayAmount(data)}</div>
         <div className="rw-date">{data.dateText}</div>
       </div>

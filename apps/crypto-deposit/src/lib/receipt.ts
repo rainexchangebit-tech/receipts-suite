@@ -29,6 +29,7 @@ export type ReceiptData = {
   showStatusBar: boolean;
   showHomeIndicator: boolean;
   carrier: string;
+  showWifi: boolean;
 };
 
 export type AssetMeta = {
@@ -86,10 +87,11 @@ export const DEFAULT_RECEIPT: ReceiptData = {
   showCancel: true,
   showExplorer: true,
   statusTime: "9:52",
-  battery: 80,
+  battery: 56,
   showStatusBar: true,
   showHomeIndicator: true,
   carrier: "5G",
+  showWifi: false,
 };
 
 export const NETWORK_PRESETS = [

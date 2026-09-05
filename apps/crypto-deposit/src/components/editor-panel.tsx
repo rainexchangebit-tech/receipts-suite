@@ -236,27 +236,36 @@ export function EditorPanel() {
 
       <section className="set-card set-card-last">
         <div className="set-kicker">Phone chrome</div>
-        <Row label="Clock">
+        <Row label="Time">
           <input
             value={s.statusTime}
             onChange={(e) => s.update({ statusTime: e.target.value })}
           />
         </Row>
-        <Row label="Carrier">
+        <Row label="Signal">
           <input
             value={s.carrier}
             onChange={(e) => s.update({ carrier: e.target.value })}
           />
         </Row>
-        <Row label={`Battery ${s.battery}%`}>
+        <Row label="Battery fill">
           <input
             type="range"
             min={0}
             max={100}
             value={s.battery}
+            aria-label="Battery fill"
             onChange={(e) => s.update({ battery: Number(e.target.value) })}
           />
         </Row>
+        <label className="set-check">
+          <input
+            type="checkbox"
+            checked={s.showWifi}
+            onChange={() => s.update({ showWifi: !s.showWifi })}
+          />
+          <span>Show Wi‑Fi between 5G and battery</span>
+        </label>
         <Toggle
           label="Status bar"
           on={s.showStatusBar}

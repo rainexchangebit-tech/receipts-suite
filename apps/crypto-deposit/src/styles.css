@@ -90,13 +90,50 @@
   box-sizing: border-box;
 }
 
-.rw-sb {
+.bn-statusbar {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  padding: 14px 18px 8px 27px;
-  height: 50px;
+  height: 54px;
+  padding: 14px 18px 0 21px;
+  color: #111111;
   flex-shrink: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    "Segoe UI", sans-serif;
+}
+
+.bn-status-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bn-status-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bn-time {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.bn-5g {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.bn-wifi {
+  display: grid;
+  place-items: center;
+  color: inherit;
+  line-height: 0;
 }
 
 .rw-sb-spacer {
@@ -104,33 +141,9 @@
   flex-shrink: 0;
 }
 
-.rw-sb-time {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: #111111;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-}
-
-.rw-sb-right {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #111111;
-  padding-bottom: 1px;
-}
-
-.rw-sb-carrier {
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1;
-}
-
 .rw-nav {
   position: relative;
-  height: 40px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +175,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6px 24px 0;
+  padding: 8px 24px 0;
   flex-shrink: 0;
 }
 
@@ -175,7 +188,7 @@
 }
 
 .rw-amount {
-  margin-top: 12px;
+  margin-top: 14px;
   font-size: 26px;
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -184,22 +197,22 @@
 }
 
 .rw-date {
-  margin-top: 9px;
+  margin-top: 8px;
   font-size: 15px;
   font-weight: 400;
-  color: #b0b5be;
+  color: #b5b6bb;
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
 
 .rw-card {
-  margin: 22px 14px 0;
+  margin: 28px 14px 0;
   background: #e8ebf2;
   border-radius: 16px;
-  padding: 18px 16px 17px;
+  padding: 20px 18px 22px;
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  gap: 21px;
   flex-shrink: 0;
 }
 
@@ -207,7 +220,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -216,15 +229,16 @@
 }
 
 .rw-row-hash {
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 3px;
+  flex-wrap: nowrap;
   align-items: baseline;
+  justify-content: flex-start;
 }
 
 .rw-label {
   font-size: 16px;
   font-weight: 400;
-  color: #8e939d;
+  color: #b0b3be;
   letter-spacing: -0.01em;
   flex: 0 1 auto;
   min-width: 0;
@@ -232,7 +246,7 @@
 }
 
 .rw-row-hash .rw-label {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
 }
 
 .rw-value {
@@ -253,11 +267,11 @@
 
 .rw-row-hash .rw-value {
   flex: 0 0 auto;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .rw-tone-pending {
-  color: #3aa4c8;
+  color: #6aa3bd;
   font-weight: 500;
 }
 
@@ -288,17 +302,17 @@
   display: block;
   font-size: 13px;
   font-weight: 400;
-  color: #a7abb4;
+  color: #7b7f8a;
   letter-spacing: -0.01em;
   line-height: 1.2;
   white-space: nowrap;
 }
 
 .rw-actions {
-  margin: 14px 14px 0;
+  margin: 16px 14px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   flex-shrink: 0;
 }
 
@@ -320,18 +334,18 @@
 }
 
 .rw-btn-speed {
-  background: #cde8fb;
-  color: #2f8bb5;
+  background: #cee7fb;
+  color: #408296;
 }
 
 .rw-btn-cancel {
-  background: #fce4e7;
-  color: #d15d6c;
+  background: #fde7ea;
+  color: #94505b;
 }
 
 .rw-btn-explorer {
-  background: #cde8fb;
-  color: #2f8bb5;
+  background: #cee7fb;
+  color: #408296;
 }
 
 .rw-spacer {
@@ -600,6 +614,29 @@
   box-shadow: none;
   accent-color: var(--color-accent);
   text-align: left;
+}
+
+.set-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 42px;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-border);
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--color-fg-muted);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+}
+
+.set-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
 }
 
 .set-card .seg,
