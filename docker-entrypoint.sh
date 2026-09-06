@@ -11,6 +11,8 @@ PORT=3004 HOST=127.0.0.1 VITE_AUTH_ENABLED=false node /opt/receipts/okx-deposit/
 okx_deposit_pid=$!
 PORT=3005 HOST=127.0.0.1 VITE_AUTH_ENABLED=false node /opt/receipts/okx-withdraw/server/index.mjs &
 okx_withdraw_pid=$!
+PORT=3006 HOST=127.0.0.1 VITE_AUTH_ENABLED=false node /opt/receipts/binance-home/server/index.mjs &
+binance_home_pid=$!
 
-trap 'kill "$receipt_pid" "$deposit_pid" "$crypto_deposit_pid" "$okx_deposit_pid" "$okx_withdraw_pid" 2>/dev/null || true' INT TERM EXIT
+trap 'kill "$receipt_pid" "$deposit_pid" "$crypto_deposit_pid" "$okx_deposit_pid" "$okx_withdraw_pid" "$binance_home_pid" 2>/dev/null || true' INT TERM EXIT
 exec nginx -g 'daemon off;'

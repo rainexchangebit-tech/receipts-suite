@@ -14,6 +14,7 @@ const apps = [
   { path: "crypto-deposit", port: 3003 },
   { path: "okx-deposit", port: 3004 },
   { path: "okx-withdraw", port: 3005 },
+  { path: "binance-home", port: 3006 },
 ];
 
 const receipts = apps.map(({ path, port: appPort }) =>

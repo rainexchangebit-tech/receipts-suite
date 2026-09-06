@@ -38,6 +38,13 @@ RUN npm ci --include=dev
 COPY apps/okx-withdraw/ ./
 RUN npm run typecheck && npm run build
 
+FROM node:24-alpine AS binance-home-build
+WORKDIR /build/binance-home
+ENV VITE_AUTH_ENABLED=false
+COPY apps/binance-home/package.json apps/binance-home/package-lock.json ./
+RUN npm ci --include=dev
+COPY apps/binance-home/ ./
+RUN npm run typecheck && npm run build
 FROM node:24-alpine AS runtime
 RUN apk add --no-cache nginx
 COPY hub/ /usr/share/nginx/html/
@@ -48,6 +55,7 @@ COPY --from=binance-deposit-build /build/binance-deposit/.output/ /opt/receipts/
 COPY --from=crypto-deposit-build /build/crypto-deposit/.output/ /opt/receipts/crypto-deposit/
 COPY --from=okx-deposit-build /build/okx-deposit/.output/ /opt/receipts/okx-deposit/
 COPY --from=okx-withdraw-build /build/okx-withdraw/.output/ /opt/receipts/okx-withdraw/
+COPY --from=binance-home-build /build/binance-home/.output/ /opt/receipts/binance-home/
 RUN chmod +x /usr/local/bin/receipts-suite-entrypoint
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 CMD wget -q -O /dev/null http://127.0.0.1:8080/healthz || exit 1
