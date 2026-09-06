@@ -3,9 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "install:apps": "npm ci --include=dev --prefix apps/binance-withdraw && npm ci --include=dev --prefix apps/binance-deposit && npm ci --include=dev --prefix apps/crypto-deposit && npm ci --include=dev --prefix apps/okx-deposit",
-    "typecheck": "npm run typecheck --prefix apps/binance-withdraw && npm run typecheck --prefix apps/binance-deposit && npm run typecheck --prefix apps/crypto-deposit && npm run typecheck --prefix apps/okx-deposit",
-    "build": "npm run build --prefix apps/binance-withdraw && npm run build --prefix apps/binance-deposit && npm run build --prefix apps/crypto-deposit && npm run build --prefix apps/okx-deposit",
+    "install:apps": "npm ci --include=dev --prefix apps/binance-withdraw && npm ci --include=dev --prefix apps/binance-deposit && npm ci --include=dev --prefix apps/crypto-deposit && npm ci --include=dev --prefix apps/okx-deposit && npm ci --include=dev --prefix apps/okx-withdraw",
+    "typecheck": "npm run typecheck --prefix apps/binance-withdraw && npm run typecheck --prefix apps/binance-deposit && npm run typecheck --prefix apps/crypto-deposit && npm run typecheck --prefix apps/okx-deposit && npm run typecheck --prefix apps/okx-withdraw",
+    "test": "npm test --prefix apps/binance-withdraw && npm test --prefix apps/binance-deposit && npm test --prefix apps/crypto-deposit && npm test --prefix apps/okx-deposit && npm test --prefix apps/okx-withdraw",
+    "build": "npm run build --prefix apps/binance-withdraw && npm run build --prefix apps/binance-deposit && npm run build --prefix apps/crypto-deposit && npm run build --prefix apps/okx-deposit && npm run build --prefix apps/okx-withdraw",
     "preview": "node scripts/local-preview.mjs"
   }
 }
